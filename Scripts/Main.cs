@@ -160,11 +160,16 @@ public partial class Main : Node2D {
 
   private Word PickWordSmartly(List<Word> existing) {
     var success = false;
-    var maxIndex = Data.Instance.Spells.Count;
+    var count = Data.Instance.Spells.Count;
     var candidate = "";
 
+    var min = Math.Clamp((_level - 5) / 10f, 0, 0.5);
+    var max = Math.Clamp((_level + 5) / 10f, 0.5, 1);
+    var minIndex = (int)(min * count);
+    var maxIndex = (int)(max * count);
+    
     while (!success) {
-      var index = _rng.RandiRange(0, maxIndex - 1);
+      var index = _rng.RandiRange(minIndex, maxIndex - 1);
       candidate = Data.Instance.Spells[index].ToLower();
       success = existing.All(word => !word.Needs(candidate[0]));
     }
