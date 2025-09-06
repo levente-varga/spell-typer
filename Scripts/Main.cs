@@ -9,6 +9,7 @@ public partial class Main : Node2D {
   private Label _levelLabel;
   private Label _timeLabel;
   private Control _deathScreen;
+  private Control _startScreen;
   
   private List<Word> _usedWords = [];
   private List<Word> _currentWords = [];
@@ -37,8 +38,10 @@ public partial class Main : Node2D {
     _levelLabel = GetNode<Label>("Labels/LevelValueLabel");
     _timeLabel = GetNode<Label>("Labels/TimeValueLabel");
     _deathScreen = GetNode<Control>("Labels/DeathScreen");
+    _startScreen = GetNode<Control>("Labels/StartScreen");
     
     _deathScreen.Hide();
+    _startScreen.Show();
 
     AddChild(_timer);
     _timer.Timeout += OnTimeout;
@@ -46,15 +49,13 @@ public partial class Main : Node2D {
     foreach (var word in _wordDisplays) {
       word.OnDone += OnWordDone;
     }
-    
-    StartLevel();
   }
 
   public override void _Process(double delta) {
     _timeLabel.Text = $"{(int)_timer.GetTimeLeft()}";
   }
 
-  public void OnTimeout() {
+  private void OnTimeout() {
     _alive = false;
     _timer.Stop();
     _deathScreen.Show();
@@ -75,17 +76,26 @@ public partial class Main : Node2D {
   }
 
   public override void _Input(InputEvent @event) {
+    if (@event is InputEventKey { Keycode: Key.Enter }) {
+      StartGame();
+      return;
+    }
+    
     if (!_alive) return;
     
     base._Input(@event);
     if (@event is InputEventKey { Pressed: false }) return;
     var scancode = @event.AsText();
+
+    if (@event is InputEventKey { Keycode: Key.Backspace }) {
+      RemoveFocus();
+      return;
+    }
+    
     if (scancode.Length is > 1 or 0) return;
     var c = scancode.ToLower()[0];
-    GD.Print(c);
 
     var target = FindFocusedWord() ?? FindWordThatNeeds(c);
-
     if (target == null) return;
 
     var targetIndex = (int)target;
@@ -116,6 +126,20 @@ public partial class Main : Node2D {
     return null;
   }
 
+  private void RemoveFocus() {
+    foreach (var word in _wordDisplays) {
+      word.Focused = false;
+    }
+  }
+
+  private void StartGame() {
+    _level = 1;
+    _alive = true;
+    _deathScreen.Hide();
+    _startScreen.Hide();
+    StartLevel();
+  }
+
   private void TurnPage() {
     _usedWords.AddRange(_currentWords);
     _currentWords.Clear();
@@ -129,7 +153,7 @@ public partial class Main : Node2D {
     var newWords = new List<Word>();
     var maxIndex = Data.Instance.Spells.Count;
     for (var i = 0; i < count; i++) {
-      var index = _rng.RandiRange(0, maxIndex);
+      var index = _rng.RandiRange(0, maxIndex - 1);
       newWords.Add(new Word(Data.Instance.Spells[index]));
     }
     return newWords;
