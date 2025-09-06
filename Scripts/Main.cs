@@ -61,6 +61,7 @@ public partial class Main : Node2D {
 
   public override void _Input(InputEvent @event) {
     base._Input(@event);
+    if (@event is InputEventKey { Pressed: false }) return;
     var scancode = @event.AsText();
     if (scancode.Length is > 1 or 0) return;
     var c = scancode.ToLower()[0];

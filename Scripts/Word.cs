@@ -12,7 +12,7 @@ public class Word(string word) {
 
   public void Type(char c) {
     if (!Needs(c)) return;
-    Typed = Typed + c;
+    Typed += c;
     Remaining = Remaining.Remove(0, 1);
     
     OnChanged?.Invoke();

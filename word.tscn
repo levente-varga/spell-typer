@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://csywv0fx4lxq"]
 
 [ext_resource type="FontFile" uid="uid://coop61pbxsldl" path="res://Assets/Fonts/alagard.ttf" id="1_3q3ku"]
-[ext_resource type="Script" uid="uid://bpijdxt20uwg8" path="res://scripts/WordDisplay.cs" id="1_vl1uy"]
+[ext_resource type="Script" uid="uid://kw1aop757dwm" path="res://scripts/WordDisplay.cs" id="1_vl1uy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vvh5c"]
 font = ExtResource("1_3q3ku")
