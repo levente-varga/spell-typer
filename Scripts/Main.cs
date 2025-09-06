@@ -7,6 +7,8 @@ namespace SpellTyper.Scripts;
 public partial class Main : Node2D {
   private Label _healthLabel;
   private Label _levelLabel;
+  private Label _timeLabel;
+  private Control _deathScreen;
   
   private List<Word> _usedWords = [];
   private List<Word> _currentWords = [];
@@ -16,6 +18,8 @@ public partial class Main : Node2D {
   private Timer _timer = new ();
   private int _level = 1;
   private int _enemyHealth = 0;
+  
+  private bool _alive = true;
 
   public override void _Ready() {
     _wordDisplays.AddRange([
@@ -29,10 +33,15 @@ public partial class Main : Node2D {
       GetNode<WordDisplay>("Book/Pages/Right/Words/Row4"),
     ]);
     
-    _healthLabel = GetNode<Label>("HealthValueLabel");
-    _levelLabel = GetNode<Label>("LevelValueLabel");
+    _healthLabel = GetNode<Label>("Labels/HealthValueLabel");
+    _levelLabel = GetNode<Label>("Labels/LevelValueLabel");
+    _timeLabel = GetNode<Label>("Labels/TimeValueLabel");
+    _deathScreen = GetNode<Control>("Labels/DeathScreen");
+    
+    _deathScreen.Hide();
 
     AddChild(_timer);
+    _timer.Timeout += OnTimeout;
 
     foreach (var word in _wordDisplays) {
       word.OnDone += OnWordDone;
@@ -42,7 +51,12 @@ public partial class Main : Node2D {
   }
 
   public override void _Process(double delta) {
-    
+    _timeLabel.Text = $"{(int)_timer.GetTimeLeft()}";
+  }
+
+  public void OnTimeout() {
+    _alive = false;
+    _deathScreen.Show();
   }
 
   private void OnWordDone() {
@@ -60,6 +74,8 @@ public partial class Main : Node2D {
   }
 
   public override void _Input(InputEvent @event) {
+    if (!_alive) return;
+    
     base._Input(@event);
     if (@event is InputEventKey { Pressed: false }) return;
     var scancode = @event.AsText();
@@ -120,7 +136,7 @@ public partial class Main : Node2D {
 
   private void StartLevel() {
     _enemyHealth = (int)(Math.Sqrt(_level) * 5);
-    _timer.Start(30);
+    _timer.Start(45);
     TurnPage();
     UpdateLabels();
   }
