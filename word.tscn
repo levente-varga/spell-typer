@@ -1,12 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://csywv0fx4lxq"]
+[gd_scene load_steps=6 format=3 uid="uid://csywv0fx4lxq"]
 
 [ext_resource type="FontFile" uid="uid://coop61pbxsldl" path="res://Assets/Fonts/alagard.ttf" id="1_3q3ku"]
-[ext_resource type="Script" uid="uid://kw1aop757dwm" path="res://scripts/WordDisplay.cs" id="1_vl1uy"]
+[ext_resource type="Script" uid="uid://b4etje4ably48" path="res://scripts/WordDisplay.cs" id="1_vl1uy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_vvh5c"]
 font = ExtResource("1_3q3ku")
 font_size = 48
-font_color = Color(1, 1, 1, 0.321569)
+font_color = Color(0.466667, 0.466667, 0.466667, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vl1uy"]
+font = ExtResource("1_3q3ku")
+font_size = 48
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
 font = ExtResource("1_3q3ku")
@@ -23,12 +27,19 @@ script = ExtResource("1_vl1uy")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-text = "Alma"
+text = "Spell"
 label_settings = SubResource("LabelSettings_vvh5c")
 
 [node name="Remaining" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-text = "leves"
+text = "ous"
+label_settings = SubResource("LabelSettings_vl1uy")
+
+[node name="FocusedRemaining" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+text = "ous"
 label_settings = SubResource("LabelSettings_28aoi")

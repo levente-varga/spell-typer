@@ -66,13 +66,14 @@ public partial class Main : Node2D {
     if (scancode.Length is > 1 or 0) return;
     var c = scancode.ToLower()[0];
     GD.Print(c);
-    var wordIndex = FindWordThatNeeds(c);
-    if (wordIndex < 0) {
-      GD.Print("No one wanted this");
-      return;
-    }
-    GD.Print($"#{wordIndex} want this");
-    _wordDisplays[wordIndex].Word.Type(c);
+
+    var target = FindFocusedWord() ?? FindWordThatNeeds(c);
+
+    if (target == null) return;
+
+    var targetIndex = (int)target;
+    _wordDisplays[targetIndex].Focused = true;
+    _wordDisplays[targetIndex].Word.Type(c);
     if (IsPageDone()) TurnPage();
   }
 
@@ -84,11 +85,18 @@ public partial class Main : Node2D {
     return true;
   }
 
-  private int FindWordThatNeeds(char c) {
+  private int? FindWordThatNeeds(char c) {
     for (var i = 0; i < _wordDisplays.Count; i++) {
       if (_wordDisplays[i].Word.Needs(c)) return i;
     }
-    return -1;
+    return null;
+  }
+  
+  private int? FindFocusedWord() {
+    for (var i = 0; i < _wordDisplays.Count; i++) {
+      if (_wordDisplays[i].Focused) return i;
+    }
+    return null;
   }
 
   private void TurnPage() {
