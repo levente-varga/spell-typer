@@ -11,6 +11,7 @@ public partial class Main : Node2D {
   private Label _timeLabel;
   private Control _deathScreen;
   private Control _startScreen;
+  private Control _pages;
   
   private List<Word> _usedWords = [];
   private List<Word> _currentWords = [];
@@ -21,7 +22,7 @@ public partial class Main : Node2D {
   private int _level = 1;
   private int _enemyHealth = 0;
   
-  private bool _alive = true;
+  private bool _alive = false;
 
   public override void _Ready() {
     _wordDisplays.AddRange([
@@ -40,7 +41,9 @@ public partial class Main : Node2D {
     _timeLabel = GetNode<Label>("Labels/TimeValueLabel");
     _deathScreen = GetNode<Control>("Labels/DeathScreen");
     _startScreen = GetNode<Control>("Labels/StartScreen");
+    _pages = GetNode<Control>("Book/Pages");
     
+    _pages.Hide();
     _deathScreen.Hide();
     _startScreen.Show();
 
@@ -59,6 +62,7 @@ public partial class Main : Node2D {
   private void OnTimeout() {
     _alive = false;
     _timer.Stop();
+    _pages.Hide();
     _deathScreen.Show();
   }
 
@@ -77,12 +81,13 @@ public partial class Main : Node2D {
   }
 
   public override void _Input(InputEvent @event) {
-    if (@event is InputEventKey { Keycode: Key.Enter }) {
-      StartGame();
+    if (!_alive) {
+      if ( @event is InputEventKey { Keycode: Key.Enter }) {
+        StartGame();
+      }
+      
       return;
     }
-    
-    if (!_alive) return;
     
     base._Input(@event);
     if (@event is InputEventKey { Pressed: false }) return;
@@ -136,6 +141,7 @@ public partial class Main : Node2D {
   private void StartGame() {
     _level = 1;
     _alive = true;
+    _pages.Show();
     _deathScreen.Hide();
     _startScreen.Hide();
     StartLevel();

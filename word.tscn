@@ -27,19 +27,16 @@ script = ExtResource("1_vl1uy")
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-text = "Spell"
 label_settings = SubResource("LabelSettings_vvh5c")
 
 [node name="Remaining" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-text = "ous"
 label_settings = SubResource("LabelSettings_vl1uy")
 
 [node name="FocusedRemaining" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 6
-text = "ous"
 label_settings = SubResource("LabelSettings_28aoi")
