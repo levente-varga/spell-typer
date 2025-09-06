@@ -4,4 +4,7 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>SpellTyper</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Fonts\" />
+  </ItemGroup>
 </Project>
