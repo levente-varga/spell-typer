@@ -63,7 +63,7 @@ public partial class Main : Node2D {
     base._Input(@event);
     var scancode = @event.AsText();
     if (scancode.Length is > 1 or 0) return;
-    var c = scancode[0];
+    var c = scancode.ToLower()[0];
     GD.Print(c);
     var wordIndex = FindWordThatNeeds(c);
     if (wordIndex < 0) {
