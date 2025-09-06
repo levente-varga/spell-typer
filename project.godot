@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Spell Typer"
-config/features=PackedStringArray("4.4", "GL Compatibility")
+config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=1200
 
 [dotnet]
 
