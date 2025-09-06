@@ -6,16 +6,17 @@
 [sub_resource type="LabelSettings" id="LabelSettings_vvh5c"]
 font = ExtResource("1_3q3ku")
 font_size = 40
-font_color = Color(0.466667, 0.466667, 0.466667, 1)
+font_color = Color(0, 0, 0, 0.266667)
 
 [sub_resource type="LabelSettings" id="LabelSettings_vl1uy"]
 font = ExtResource("1_3q3ku")
 font_size = 40
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_28aoi"]
 font = ExtResource("1_3q3ku")
 font_size = 40
-font_color = Color(1, 0.741176, 0.0784314, 1)
+font_color = Color(4.96709e-05, 0.549297, 0.934528, 1)
 
 [node name="Word" type="HBoxContainer"]
 size_flags_horizontal = 3
