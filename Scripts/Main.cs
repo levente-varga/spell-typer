@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Godot;
 
 namespace SpellTyper.Scripts;
@@ -151,12 +152,24 @@ public partial class Main : Node2D {
 
   private List<Word> GetNewWords(int count) {
     var newWords = new List<Word>();
-    var maxIndex = Data.Instance.Spells.Count;
     for (var i = 0; i < count; i++) {
-      var index = _rng.RandiRange(0, maxIndex - 1);
-      newWords.Add(new Word(Data.Instance.Spells[index]));
+      newWords.Add(PickWordSmartly(newWords));
     }
     return newWords;
+  }
+
+  private Word PickWordSmartly(List<Word> existing) {
+    var success = false;
+    var maxIndex = Data.Instance.Spells.Count;
+    var candidate = "";
+
+    while (!success) {
+      var index = _rng.RandiRange(0, maxIndex - 1);
+      candidate = Data.Instance.Spells[index].ToLower();
+      success = existing.All(word => !word.Needs(candidate[0]));
+    }
+    
+    return new Word(candidate);
   }
 
   private void StartLevel() {
