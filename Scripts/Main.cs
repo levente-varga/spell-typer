@@ -170,7 +170,7 @@ public partial class Main : Node2D {
     var candidate = "";
 
     var min = Math.Clamp((_level - 5) / 10f, 0, 0.5);
-    var max = Math.Clamp((_level + 5) / 10f, 0.5, 1);
+    var max = Math.Clamp(_level / 10f, 0.4, 1);
     var minIndex = (int)(min * count);
     var maxIndex = (int)(max * count);
     
@@ -185,7 +185,7 @@ public partial class Main : Node2D {
 
   private void StartLevel() {
     _enemyHealth = (int)(Math.Sqrt(_level) * 5);
-    _timer.Start(45);
+    _timer.Start(30);
     TurnPage();
     UpdateLabels();
   }
