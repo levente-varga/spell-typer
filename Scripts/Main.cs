@@ -56,6 +56,7 @@ public partial class Main : Node2D {
 
   public void OnTimeout() {
     _alive = false;
+    _timer.Stop();
     _deathScreen.Show();
   }
 
