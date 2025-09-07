@@ -6,11 +6,11 @@ A typing game prototype
 
 Made in Godot .NET 4.4.1
 
-You can find the source code here: [https://github.com/levente-varga/spell-typer](GitHub)
+You can find the source code here: [GitHub](https://github.com/levente-varga/spell-typer)
 
 ### Installation
 
-1. Go to [https://leventevarga.itch.io/spell-typer](itch.io) and download the game
+1. Go to [itch.io](https://leventevarga.itch.io/spell-typer) and download the game
 2. Extract the .zip file's content (the .exe and a folder containing DLLs) into a new folder
 3. Run the .exe
 
