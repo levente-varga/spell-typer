@@ -6,7 +6,7 @@ A typing game prototype
 
 Made in Godot .NET 4.4.1
 
-You can find the source code here: [GitHub](https://github.com/levente-varga/spell-typer)
+You can find the source code on [GitHub](https://github.com/levente-varga/spell-typer)
 
 ### Installation
 
