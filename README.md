@@ -1,11 +1,12 @@
 # Spell Typer
 
-
 ### About
 
 A typing game prototype
 
 Made in Godot .NET 4.4.1
+
+You can find the source code here: [https://github.com/levente-varga/spell-typer](GitHub)
 
 ### Installation
 
